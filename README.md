@@ -1,1 +1,1 @@
-# ocr-credit-card
+# OCR: Credit Card
