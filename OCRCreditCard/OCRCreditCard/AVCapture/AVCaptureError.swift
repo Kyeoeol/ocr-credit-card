@@ -23,16 +23,22 @@ extension AVCaptureError: LocalizedError {
         switch self {
         case .faildToGetCaptureDevice:
           return "Faild to get capture device."
+            
         case .cannotAddDeviceInput:
           return "Cannot add capture device input to session."
+            
         case .cannotAddVideoOutput:
           return "Cannot add capture video output to session."
+            
         case .createCaptureInput(let error):
           return "Creating capture device input: \(error.localizedDescription)"
+            
         case .deniedAuthorization:
           return "Capture device access denied."
+            
         case .restrictedAuthorization:
           return "Attempting to access a restricted capture device."
+            
         case .unknownAuthorization:
           return "Unknown authorization status for capture device."
         }

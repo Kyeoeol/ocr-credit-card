@@ -7,7 +7,11 @@
 
 import AVFoundation
 
-final class AVCaptureManager: ObservableObject {
+/*
+ AVCaptureManager needs to inherit from NSObject.
+ because AVCaptureManager will adopt AVCaptureSession‘s video output delegate.
+ */
+final class AVCaptureManager: NSObject, ObservableObject {
     enum AVCaptureStatus {
       case unconfigured
       case configured
@@ -15,9 +19,6 @@ final class AVCaptureManager: ObservableObject {
       case failed
     }
     
-    
-    // Status
-    private var status: AVCaptureStatus = .unconfigured
     
     // AVCaptureSession
     private let session = AVCaptureSession()
@@ -34,16 +35,22 @@ final class AVCaptureManager: ObservableObject {
         mediaType: .video,
         position: .unspecified
     )
-    
     // Error
     @Published var error: AVCaptureError?
+    
+    
+    // Status
+    private var status: AVCaptureStatus = .unconfigured
+    // Current Image Buffer
+    @Published var currentImageBuffer: CVImageBuffer?
     
     
     
     
     // Initialize
-    private init() {
-      configure()
+    private override init() {
+        super.init()
+        configure()
     }
     
     
@@ -70,6 +77,22 @@ final class AVCaptureManager: ObservableObject {
     }
     
 } //: AVCaptureManager
+
+
+// MARK: AVCaptureVideoDataOutputSampleBufferDelegate
+
+extension AVCaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate {
+    
+    func captureOutput(
+        _ output: AVCaptureOutput,
+        didOutput sampleBuffer: CMSampleBuffer,
+        from connection: AVCaptureConnection
+    ) {
+        guard let buffer = sampleBuffer.imageBuffer else { return }
+        currentImageBuffer = buffer
+    }
+    
+}
 
 
 // MARK: Configure
@@ -161,7 +184,6 @@ private extension AVCaptureManager {
     } //: configureCaptureSession
     
 } //: AVCaptureManager
-
 
 
 // MARK: -
