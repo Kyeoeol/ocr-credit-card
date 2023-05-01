@@ -19,39 +19,28 @@ final class AVCaptureManager: NSObject, ObservableObject {
       case failed
     }
     
-    static let shared = AVCaptureManager()
-    
     
     // AVCaptureSession
     private let session = AVCaptureSession()
     private let sessionQueue = DispatchQueue(label: "com.ocr.sessionqueue")
     // Video Output
     private let videoOutput = AVCaptureVideoDataOutput()
-    private let videoOutputQueue = DispatchQueue(label: "com.ocr.outputqueue")
-    // Discovery Session
-    private let discoverySession = AVCaptureDevice.DiscoverySession(
-        deviceTypes: [
-            .builtInTrueDepthCamera,
-            .builtInDualCamera,
-            .builtInWideAngleCamera
-        ],
-        mediaType: .video,
-        position: .unspecified
-    )
-    // Error
-    @Published var error: AVCaptureError?
+    // Capture Device
+    private let device = AVCaptureDevice.default(for: .video)
     
     
     // Status
     private var status: AVCaptureStatus = .unconfigured
     // Current Image Buffer
     @Published var currentImageBuffer: CVImageBuffer?
+    // Error
+    @Published var error: AVCaptureError?
     
     
     
     
     // Initialize
-    private override init() {
+    override init() {
         super.init()
         configure()
     }
@@ -94,7 +83,7 @@ extension AVCaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate {
 
 private extension AVCaptureManager {
     
-    // Check Capture Device Permission
+    // MARK: Check Capture Device Permission
     private func checkCaptureDevicePermission() async -> Bool {
         return await withCheckedContinuation { continuation in
             let authStatus = AVCaptureDevice.authorizationStatus(for: .video)
@@ -127,7 +116,7 @@ private extension AVCaptureManager {
     } //: checkCaptureDevicePermission
     
     
-    // Configure CaptureSession
+    // MARK: Configure CaptureSession
     // You usually need to configure a capture session just once in your app.
     private func configureCaptureSession() {
         guard status == .unconfigured else { return }
@@ -143,8 +132,7 @@ private extension AVCaptureManager {
         }
         
         // AVCaptureDevice
-        let device = self.getAVCaptureDevice(in: .back)
-        guard let device = device else {
+        guard let device = self.device else {
             setError(.faildToGetCaptureDevice)
             return
         }
@@ -179,9 +167,9 @@ private extension AVCaptureManager {
     } //: configureCaptureSession
     
     
-    // Configure Sample Buffer Delegate
+    // MARK: Configure Sample Buffer Delegate
     func configureSampleBufferDelegate() {
-        self.videoOutput.setSampleBufferDelegate(self, queue: self.videoOutputQueue)
+        self.videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue.main)
     }
     
 } //: AVCaptureManager
@@ -191,15 +179,7 @@ private extension AVCaptureManager {
 
 private extension AVCaptureManager {
     
-    // Get AVCaptureDevice
-    func getAVCaptureDevice(in position: AVCaptureDevice.Position) -> AVCaptureDevice? {
-      let devices = self.discoverySession.devices
-      let device = devices.first { $0.position == position }
-      return device
-    }
-    
-    
-    // Set Error
+    // MARK: Set Error
     func setError(_ error: AVCaptureError) {
         DispatchQueue.main.async {
             self.error = error

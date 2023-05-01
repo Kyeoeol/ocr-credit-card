@@ -18,18 +18,17 @@ struct CaptureErrorView: View {
     
     var body: some View {
         VStack {
-            if let localizedDescription = error?.localizedDescription {
-                Text(localizedDescription)
-                    .bold()
-                    .foregroundColor(.white)
-                    .multilineTextAlignment(.center)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(
-                        Color.red
-                            .edgesIgnoringSafeArea(.top)
-                    )
-            }
+            Text(error?.localizedDescription ?? "")
+                .bold()
+                .foregroundColor(.white)
+                .multilineTextAlignment(.center)
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(
+                    Color.red
+                        .edgesIgnoringSafeArea(.top)
+                )
+                .opacity(error == nil ? 0.0 : 1.0)
             
             Spacer()
         } //: VStack

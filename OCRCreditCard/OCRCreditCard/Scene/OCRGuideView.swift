@@ -11,7 +11,7 @@ struct OCRGuideView: View {
     
     // MARK: Properties
     
-    @Environment(\.ocrGuideSize) var ocrGuideSize
+    @Environment(\.ocrGuideSize) private var ocrGuideSize
     
     
     // MARK: Body

@@ -26,6 +26,7 @@ struct OCRCreditCardApp: App {
         WindowGroup {
             GeometryReader { proxy in
                 ContentView()
+                    .environmentObject(AVCaptureManager())
                     .environment(\.windowSize, proxy.size)
             }
         }

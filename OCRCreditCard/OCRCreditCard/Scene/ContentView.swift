@@ -11,7 +11,15 @@ struct ContentView: View {
     
     // MARK: Properties
     
-    @ObservedObject private var ocrManager = OCRManager()
+    @EnvironmentObject var avCaptureManeger: AVCaptureManager
+    
+    private var buffer: CVImageBuffer? {
+        return avCaptureManeger.currentImageBuffer
+    }
+    private var frame: CGImage? {
+        return buffer?.createCGImage()
+    }
+    private var error: Error? { return avCaptureManeger.error }
     
     
     // MARK: Body
@@ -19,12 +27,16 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             // CaptureFrame
-            CaptureFrameView(frame: ocrManager.frame)
-            // Capture Error
-            CaptureErrorView(error: ocrManager.error)
-            
+            CaptureFrameView(frame: frame)
+
             // OCR: Guide
             OCRGuideView()
+
+            // OCR: Result
+            OCRResultView(buffer: buffer)
+
+            // Capture Error
+            CaptureErrorView(error: error)
         }
     }
 }
