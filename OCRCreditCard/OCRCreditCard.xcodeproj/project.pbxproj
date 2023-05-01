@@ -22,6 +22,7 @@
 		80DFCF6F29FF8D6B008AD744 /* CGImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DFCF6E29FF8D6B008AD744 /* CGImage+Extension.swift */; };
 		80DFCF7229FF9168008AD744 /* OCRManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DFCF7129FF9168008AD744 /* OCRManager.swift */; };
 		80DFCF7429FF9344008AD744 /* OCRErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DFCF7329FF9344008AD744 /* OCRErrorView.swift */; };
+		80DFCF7629FF95C3008AD744 /* OCRGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DFCF7529FF95C3008AD744 /* OCRGuideView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		80DFCF6E29FF8D6B008AD744 /* CGImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGImage+Extension.swift"; sourceTree = "<group>"; };
 		80DFCF7129FF9168008AD744 /* OCRManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRManager.swift; sourceTree = "<group>"; };
 		80DFCF7329FF9344008AD744 /* OCRErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRErrorView.swift; sourceTree = "<group>"; };
+		80DFCF7529FF95C3008AD744 /* OCRGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRGuideView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 			children = (
 				805D52AC29FCFCFC00FA5A5F /* ContentView.swift */,
 				80DFCF6C29FF6BFD008AD744 /* CaptureFrameView.swift */,
+				80DFCF7529FF95C3008AD744 /* OCRGuideView.swift */,
 				80DFCF7329FF9344008AD744 /* OCRErrorView.swift */,
 			);
 			path = Scene;
@@ -280,6 +283,7 @@
 				805D527A29FCFB8600FA5A5F /* AppDelegate.swift in Sources */,
 				80DFCF6329FEAEE6008AD744 /* String+Extension.swift in Sources */,
 				805D52AD29FCFCFC00FA5A5F /* ContentView.swift in Sources */,
+				80DFCF7629FF95C3008AD744 /* OCRGuideView.swift in Sources */,
 				805D52C929FCFFDA00FA5A5F /* AppMain.swift in Sources */,
 				80DFCF6129FEADDD008AD744 /* Int+Extension.swift in Sources */,
 				805D52CE29FD25A200FA5A5F /* SceneDelegate.swift in Sources */,

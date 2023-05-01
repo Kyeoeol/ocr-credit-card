@@ -9,7 +9,12 @@ import SwiftUI
 
 struct OCRErrorView: View {
     
+    // MARK: Properties
+    
     var error: Error?
+    
+    
+    // MARK: Body
     
     var body: some View {
         VStack {
@@ -30,6 +35,9 @@ struct OCRErrorView: View {
         } //: VStack
     }
 }
+
+
+// MARK: Previews
 
 struct OCRErrorView_Previews: PreviewProvider {
     static var previews: some View {
