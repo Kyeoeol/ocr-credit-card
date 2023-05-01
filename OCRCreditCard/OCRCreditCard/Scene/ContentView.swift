@@ -8,10 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    // MARK: Properties
+    
+    @ObservedObject private var captureManager = AVCaptureManager()
+    
+    
+    // MARK: Body
+    
     var body: some View {
-        Text("Hello, World!")
+        CaptureFrameView(frame: nil)
     }
 }
+
+
+// MARK: Previews
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

@@ -48,7 +48,7 @@ final class AVCaptureManager: NSObject, ObservableObject {
     
     
     // Initialize
-    private override init() {
+    override init() {
         super.init()
         configure()
     }
