@@ -11,13 +11,18 @@ struct ContentView: View {
     
     // MARK: Properties
     
-    @ObservedObject private var captureManager = AVCaptureManager()
+    @ObservedObject private var ocrManager = OCRManager()
     
     
     // MARK: Body
     
     var body: some View {
-        CaptureFrameView(frame: nil)
+        ZStack {
+            // CaptureFrame
+            CaptureFrameView(frame: ocrManager.frame)
+            // OCRError
+            OCRErrorView(error: ocrManager.error)
+        }
     }
 }
 

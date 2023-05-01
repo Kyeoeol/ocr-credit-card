@@ -19,12 +19,15 @@ final class AVCaptureManager: NSObject, ObservableObject {
       case failed
     }
     
+    static let shared = AVCaptureManager()
+    
     
     // AVCaptureSession
     private let session = AVCaptureSession()
     private let sessionQueue = DispatchQueue(label: "com.ocr.sessionqueue")
     // Video Output
     private let videoOutput = AVCaptureVideoDataOutput()
+    private let videoOutputQueue = DispatchQueue(label: "com.ocr.outputqueue")
     // Discovery Session
     private let discoverySession = AVCaptureDevice.DiscoverySession(
         deviceTypes: [
@@ -48,7 +51,7 @@ final class AVCaptureManager: NSObject, ObservableObject {
     
     
     // Initialize
-    override init() {
+    private override init() {
         super.init()
         configure()
     }
@@ -60,19 +63,9 @@ final class AVCaptureManager: NSObject, ObservableObject {
             guard await checkCaptureDevicePermission() else { return }
             sessionQueue.async {
                 self.configureCaptureSession()
+                self.configureSampleBufferDelegate()
                 self.session.startRunning()
             }
-        }
-    }
-    
-    
-    
-    
-    // Set Sample Buffer Delegate
-    func set(_ delegate: AVCaptureVideoDataOutputSampleBufferDelegate,
-             queue: DispatchQueue) {
-        sessionQueue.async {
-            self.videoOutput.setSampleBufferDelegate(delegate, queue: queue)
         }
     }
     
@@ -88,8 +81,10 @@ extension AVCaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate {
         didOutput sampleBuffer: CMSampleBuffer,
         from connection: AVCaptureConnection
     ) {
-        guard let buffer = sampleBuffer.imageBuffer else { return }
-        currentImageBuffer = buffer
+        DispatchQueue.main.async {
+            guard let buffer = sampleBuffer.imageBuffer else { return }
+            self.currentImageBuffer = buffer
+        }
     }
     
 }
@@ -182,6 +177,12 @@ private extension AVCaptureManager {
         // Configured
         status = .configured
     } //: configureCaptureSession
+    
+    
+    // Configure Sample Buffer Delegate
+    func configureSampleBufferDelegate() {
+        self.videoOutput.setSampleBufferDelegate(self, queue: self.videoOutputQueue)
+    }
     
 } //: AVCaptureManager
 

@@ -23,6 +23,7 @@ struct CaptureFrameView: View {
                 GeometryReader { proxy in
                     Image(frame,
                           scale: 1.0,
+                          orientation: .right,
                           label: frameLabel)
                     .resizable()
                     .scaledToFill()
@@ -44,7 +45,6 @@ struct CaptureFrameView: View {
 
 struct CaptureFrameView_Previews: PreviewProvider {
     static var previews: some View {
-        CaptureFrameView(frame: nil,
-                         error: .unknownAuthorization)
+        CaptureFrameView(frame: nil)
     }
 }
