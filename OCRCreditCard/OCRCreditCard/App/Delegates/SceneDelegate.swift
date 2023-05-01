@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         
-        let rootView = ContentView()
+        let rootView = ContentView().environment(\.windowSize, window.screen.bounds.size)
         let rootViewController = UIHostingController(rootView: rootView)
         window.rootViewController = rootViewController
         

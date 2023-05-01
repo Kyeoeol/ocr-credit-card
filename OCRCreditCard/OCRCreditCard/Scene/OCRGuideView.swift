@@ -9,6 +9,11 @@ import SwiftUI
 
 struct OCRGuideView: View {
     
+    // MARK: Properties
+    
+    @Environment(\.ocrGuideSize) var ocrGuideSize
+    
+    
     // MARK: Body
     
     var body: some View {
@@ -18,7 +23,8 @@ struct OCRGuideView: View {
                 .opacity(0.6)
             
             Rectangle()
-                .frame(width: 250, height: 250)
+                .frame(width: ocrGuideSize.width,
+                       height: ocrGuideSize.height)
                 .blendMode(.destinationOut)
         } //: ZStack
         .compositingGroup()

@@ -24,7 +24,10 @@ struct AppMain {
 struct OCRCreditCardApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            GeometryReader { proxy in
+                ContentView()
+                    .environment(\.windowSize, proxy.size)
+            }
         }
     }
 }

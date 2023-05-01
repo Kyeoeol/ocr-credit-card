@@ -23,6 +23,7 @@
 		80DFCF7229FF9168008AD744 /* OCRManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DFCF7129FF9168008AD744 /* OCRManager.swift */; };
 		80DFCF7429FF9344008AD744 /* OCRErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DFCF7329FF9344008AD744 /* OCRErrorView.swift */; };
 		80DFCF7629FF95C3008AD744 /* OCRGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DFCF7529FF95C3008AD744 /* OCRGuideView.swift */; };
+		80DFCF7929FFA0B1008AD744 /* Environments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DFCF7829FFA0B1008AD744 /* Environments.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		80DFCF7129FF9168008AD744 /* OCRManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRManager.swift; sourceTree = "<group>"; };
 		80DFCF7329FF9344008AD744 /* OCRErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRErrorView.swift; sourceTree = "<group>"; };
 		80DFCF7529FF95C3008AD744 /* OCRGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRGuideView.swift; sourceTree = "<group>"; };
+		80DFCF7829FFA0B1008AD744 /* Environments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environments.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 				805D52C829FCFFDA00FA5A5F /* AppMain.swift */,
 				805D52EF29FD2EE300FA5A5F /* Launch Screen.storyboard */,
 				805D528729FCFB8800FA5A5F /* Info.plist */,
+				80DFCF7829FFA0B1008AD744 /* Environments.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 				80DFCF6329FEAEE6008AD744 /* String+Extension.swift in Sources */,
 				805D52AD29FCFCFC00FA5A5F /* ContentView.swift in Sources */,
 				80DFCF7629FF95C3008AD744 /* OCRGuideView.swift in Sources */,
+				80DFCF7929FFA0B1008AD744 /* Environments.swift in Sources */,
 				805D52C929FCFFDA00FA5A5F /* AppMain.swift in Sources */,
 				80DFCF6129FEADDD008AD744 /* Int+Extension.swift in Sources */,
 				805D52CE29FD25A200FA5A5F /* SceneDelegate.swift in Sources */,
