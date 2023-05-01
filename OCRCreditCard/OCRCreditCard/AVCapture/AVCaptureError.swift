@@ -8,9 +8,9 @@
 import Foundation
 
 enum AVCaptureError: Error {
-    case cameraUnavailable
-    case cannotAddInput
-    case cannotAddOutput
+    case faildToGetCaptureDevice
+    case cannotAddDeviceInput
+    case cannotAddVideoOutput
     case createCaptureInput(Error)
     case deniedAuthorization
     case restrictedAuthorization
@@ -21,20 +21,20 @@ extension AVCaptureError: LocalizedError {
     
     var errorDescription: String? {
         switch self {
-        case .cameraUnavailable:
-          return "Camera unavailable"
-        case .cannotAddInput:
-          return "Cannot add capture input to session"
-        case .cannotAddOutput:
-          return "Cannot add video output to session"
+        case .faildToGetCaptureDevice:
+          return "Faild to get capture device."
+        case .cannotAddDeviceInput:
+          return "Cannot add capture device input to session."
+        case .cannotAddVideoOutput:
+          return "Cannot add capture video output to session."
         case .createCaptureInput(let error):
-          return "Creating capture input for camera:: \(error.localizedDescription)"
+          return "Creating capture device input: \(error.localizedDescription)"
         case .deniedAuthorization:
-          return "Camera access denied"
+          return "Capture device access denied."
         case .restrictedAuthorization:
-          return "Attempting to access a restricted capture device"
+          return "Attempting to access a restricted capture device."
         case .unknownAuthorization:
-          return "Unknown authorization status for capture device"
+          return "Unknown authorization status for capture device."
         }
     }
     
