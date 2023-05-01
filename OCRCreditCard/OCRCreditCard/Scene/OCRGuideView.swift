@@ -25,6 +25,7 @@ struct OCRGuideView: View {
             Rectangle()
                 .frame(width: ocrGuideSize.width,
                        height: ocrGuideSize.height)
+                .cornerRadius(12)
                 .blendMode(.destinationOut)
         } //: ZStack
         .compositingGroup()
@@ -37,5 +38,9 @@ struct OCRGuideView: View {
 struct OCRGuideView_Previews: PreviewProvider {
     static var previews: some View {
         OCRGuideView()
+            .environment(
+                \.windowSize,
+                 CGSize(width: 375, height: 500)
+            )
     }
 }

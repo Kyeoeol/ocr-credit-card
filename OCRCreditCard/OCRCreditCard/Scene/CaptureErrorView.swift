@@ -1,5 +1,5 @@
 //
-//  OCRErrorView.swift
+//  CaptureErrorView.swift
 //  OCRCreditCard
 //
 //  Created by kyeoeol on 2023/05/01.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct OCRErrorView: View {
+struct CaptureErrorView: View {
     
     // MARK: Properties
     
@@ -39,8 +39,8 @@ struct OCRErrorView: View {
 
 // MARK: Previews
 
-struct OCRErrorView_Previews: PreviewProvider {
+struct CaptureErrorView_Previews: PreviewProvider {
     static var previews: some View {
-        OCRErrorView(error: AVCaptureError.cannotAddDeviceInput)
+        CaptureErrorView(error: AVCaptureError.cannotAddDeviceInput)
     }
 }

@@ -20,10 +20,11 @@ struct ContentView: View {
         ZStack {
             // CaptureFrame
             CaptureFrameView(frame: ocrManager.frame)
+            // Capture Error
+            CaptureErrorView(error: ocrManager.error)
+            
             // OCR: Guide
             OCRGuideView()
-            // OCR: Error
-            OCRErrorView(error: ocrManager.error)
         }
     }
 }
