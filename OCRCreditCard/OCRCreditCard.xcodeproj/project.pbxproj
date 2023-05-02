@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8056E6B42A013F7300B318FF /* AVCaptureViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8056E6B32A013F7300B318FF /* AVCaptureViewRepresentable.swift */; };
+		8056E6B62A01422500B318FF /* AVCaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8056E6B52A01422500B318FF /* AVCaptureView.swift */; };
 		805D527A29FCFB8600FA5A5F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805D527929FCFB8600FA5A5F /* AppDelegate.swift */; };
 		805D528329FCFB8800FA5A5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 805D528229FCFB8800FA5A5F /* Assets.xcassets */; };
 		805D529129FCFB8800FA5A5F /* OCRCreditCardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805D529029FCFB8800FA5A5F /* OCRCreditCardTests.swift */; };
@@ -19,7 +21,7 @@
 		80DFCF6329FEAEE6008AD744 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DFCF6229FEAEE6008AD744 /* String+Extension.swift */; };
 		80DFCF6529FF589C008AD744 /* AVCaptureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DFCF6429FF589C008AD744 /* AVCaptureManager.swift */; };
 		80DFCF6D29FF6BFD008AD744 /* CaptureFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DFCF6C29FF6BFD008AD744 /* CaptureFrameView.swift */; };
-		80DFCF7429FF9344008AD744 /* CaptureErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DFCF7329FF9344008AD744 /* CaptureErrorView.swift */; };
+		80DFCF7429FF9344008AD744 /* AVCaptureErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DFCF7329FF9344008AD744 /* AVCaptureErrorView.swift */; };
 		80DFCF7629FF95C3008AD744 /* OCRGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DFCF7529FF95C3008AD744 /* OCRGuideView.swift */; };
 		80DFCF7929FFA0B1008AD744 /* Environments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DFCF7829FFA0B1008AD744 /* Environments.swift */; };
 		80DFCF7D29FFCF97008AD744 /* OCRResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DFCF7C29FFCF97008AD744 /* OCRResultView.swift */; };
@@ -37,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8056E6B32A013F7300B318FF /* AVCaptureViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureViewRepresentable.swift; sourceTree = "<group>"; };
+		8056E6B52A01422500B318FF /* AVCaptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureView.swift; sourceTree = "<group>"; };
 		805D527629FCFB8600FA5A5F /* OCRCreditCard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OCRCreditCard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		805D527929FCFB8600FA5A5F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		805D528229FCFB8800FA5A5F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -52,7 +56,7 @@
 		80DFCF6229FEAEE6008AD744 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		80DFCF6429FF589C008AD744 /* AVCaptureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureManager.swift; sourceTree = "<group>"; };
 		80DFCF6C29FF6BFD008AD744 /* CaptureFrameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureFrameView.swift; sourceTree = "<group>"; };
-		80DFCF7329FF9344008AD744 /* CaptureErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureErrorView.swift; sourceTree = "<group>"; };
+		80DFCF7329FF9344008AD744 /* AVCaptureErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureErrorView.swift; sourceTree = "<group>"; };
 		80DFCF7529FF95C3008AD744 /* OCRGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRGuideView.swift; sourceTree = "<group>"; };
 		80DFCF7829FFA0B1008AD744 /* Environments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environments.swift; sourceTree = "<group>"; };
 		80DFCF7C29FFCF97008AD744 /* OCRResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRResultView.swift; sourceTree = "<group>"; };
@@ -140,9 +144,11 @@
 			children = (
 				805D52AC29FCFCFC00FA5A5F /* ContentView.swift */,
 				80DFCF6C29FF6BFD008AD744 /* CaptureFrameView.swift */,
-				80DFCF7329FF9344008AD744 /* CaptureErrorView.swift */,
 				80DFCF7529FF95C3008AD744 /* OCRGuideView.swift */,
 				80DFCF7C29FFCF97008AD744 /* OCRResultView.swift */,
+				8056E6B32A013F7300B318FF /* AVCaptureViewRepresentable.swift */,
+				8056E6B52A01422500B318FF /* AVCaptureView.swift */,
+				80DFCF7329FF9344008AD744 /* AVCaptureErrorView.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -279,13 +285,15 @@
 				80DFCF6329FEAEE6008AD744 /* String+Extension.swift in Sources */,
 				805D52AD29FCFCFC00FA5A5F /* ContentView.swift in Sources */,
 				80DFCF7629FF95C3008AD744 /* OCRGuideView.swift in Sources */,
+				8056E6B62A01422500B318FF /* AVCaptureView.swift in Sources */,
 				80DFCF7F29FFD3AD008AD744 /* CVImageBuffer+Extension.swift in Sources */,
 				80DFCF7D29FFCF97008AD744 /* OCRResultView.swift in Sources */,
 				80DFCF7929FFA0B1008AD744 /* Environments.swift in Sources */,
 				805D52C929FCFFDA00FA5A5F /* AppMain.swift in Sources */,
 				80DFCF6129FEADDD008AD744 /* Int+Extension.swift in Sources */,
 				805D52CE29FD25A200FA5A5F /* SceneDelegate.swift in Sources */,
-				80DFCF7429FF9344008AD744 /* CaptureErrorView.swift in Sources */,
+				80DFCF7429FF9344008AD744 /* AVCaptureErrorView.swift in Sources */,
+				8056E6B42A013F7300B318FF /* AVCaptureViewRepresentable.swift in Sources */,
 				80DFCF6D29FF6BFD008AD744 /* CaptureFrameView.swift in Sources */,
 				80DFCF5D29FEAD14008AD744 /* AVCaptureError.swift in Sources */,
 				80DFCF6529FF589C008AD744 /* AVCaptureManager.swift in Sources */,

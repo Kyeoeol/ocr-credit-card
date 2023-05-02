@@ -11,7 +11,7 @@ struct ContentView: View {
     
     // MARK: Properties
     
-    @ObservedObject var avCaptureManeger: AVCaptureManager
+    @ObservedObject var avCaptureManeger = AVCaptureManager()
     
     private var buffer: CVImageBuffer? {
         return avCaptureManeger.currentImageBuffer
@@ -25,19 +25,20 @@ struct ContentView: View {
     // MARK: Body
     
     var body: some View {
-        ZStack {
-            // CaptureFrame
-            CaptureFrameView(frame: frame)
-
-            // OCR: Guide
-            OCRGuideView()
-
-            // OCR: Result
-            OCRResultView(buffer: buffer)
-
-            // Capture Error
-            CaptureErrorView(error: error)
-        }
+//        ZStack {
+//            // CaptureFrame
+//            CaptureFrameView(frame: frame)
+//
+//            // OCR: Guide
+//            OCRGuideView()
+//
+//            // OCR: Result
+//            OCRResultView(buffer: buffer)
+//
+//            // Capture Error
+//            CaptureErrorView(error: error)
+//        }
+        AVCaptureView()
     }
 }
 
@@ -46,8 +47,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(
-            avCaptureManeger: AVCaptureManager()
-        )
+        ContentView()
     }
 }

@@ -137,6 +137,18 @@ private extension AVCaptureManager {
             return
         }
         
+        // Device Configuration
+        do {
+            try device.lockForConfiguration()
+            if device.isFocusModeSupported(.continuousAutoFocus) {
+                device.focusMode = .continuousAutoFocus
+            }
+            device.unlockForConfiguration()
+        }
+        catch {
+            print("Failed to configure focusMode.")
+        }
+        
         // Add Device Input
         do {
             let deviceInput = try AVCaptureDeviceInput(device: device)
