@@ -1,5 +1,5 @@
 //
-//  AVCaptureError.swift
+//  OCRCaptureError.swift
 //  OCRCreditCard
 //
 //  Created by kyeoeol on 2023/04/30.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum AVCaptureError: Error {
+enum OCRCaptureError: Error {
     case faildToGetCaptureDevice
     case cannotAddDeviceInput
     case cannotAddVideoOutput
@@ -15,9 +15,10 @@ enum AVCaptureError: Error {
     case deniedAuthorization
     case restrictedAuthorization
     case unknownAuthorization
+    case unspecified(String)
 }
 
-extension AVCaptureError: LocalizedError {
+extension OCRCaptureError: LocalizedError {
     
     var errorDescription: String? {
         switch self {
@@ -41,6 +42,9 @@ extension AVCaptureError: LocalizedError {
             
         case .unknownAuthorization:
           return "Unknown authorization status for capture device."
+            
+        case .unspecified(let description):
+            return "Unspecified Error: \(description)"
         }
     }
     
