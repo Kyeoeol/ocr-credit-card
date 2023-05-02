@@ -146,53 +146,33 @@ private extension OCRResultView {
     
     // MARK: Card Number Verification
     /*
-     카드 번호 검증코드
-     위에서 설명한 것 처럼 카드번호의 맨 마지막 숫자는 카드번호의 검증코드이다.
-     카드번호 총 16자리 숫자에서(아멕스카드는 15자리) 검증번호 체계는 다음처럼 계산한다.
-
-      1) 마지막 검증코드숫자를 제외하고 그 앞 숫자부터 거꾸로 가면서 2를 곱하고, 그다음은 1을 곱하고, 다시 2와 1 곱하기를
-          번갈아 나열해서 곱한다.
-     2) 곱셈한 결과가 10을 넘을 경우 다시 숫자끼리 더한다.
-         - 예를 들어 7*2 = 14 일 경우 다시 1+4 = 5 로 치환한다.
-     3) 모든 숫자의 계산 결과를 모두 더한다.
-     4) 합계 숫자의 끝자리 수를 10에서 빼면 검증코드 숫자이다.(끝자리 수가 0인 경우 그냥 0이다.)
-         - 예를 들어 합계 숫자가 62이면, 끝자리는 2이고, 검증코드는 10-2= 8이 된다.(합계숫자가 50이면 검증코드는 0이다.)
+     - Luhn’s Algorithm(룬 알고리즘)
+     - IBM의 Hans Peter Luhn가 발명했으며, 신용카드 번호 등 식별용 번호가 유효한지 확인하기 위한 알고리즘이다.
+     - 암호화 해시 함수처럼 악의적인 공격을 막기 위한 것이 아니라, 번호 오기입 등 우연한 실수를 방지하기 위해 고안되었다.
+     - 카드 종류에 따라 룬 알고리즘으로 유효성을 판별할 수 없는 경우도 있다.(ex. 삼성카드에서 발급한 법인카드)
+     
+     1. 뒤에서 2번째 자리 숫자부터 시작해, 하나씩 건너뛰면서 2를 곱해준 뒤, 모든 digit을 합산한다.
+        (각 digit의 합산이므로 2를 곱한 결과가 12인 경우 12가 아닌 1과 2를 각각 더한다.)
+     2. 2로 곱하지 않은 모든 digit을 합산한다.
+     3. 총 합계의 마지막 자리가 0이라면(즉 합계 모듈로 10의 결과가 0이라면) 유효한 숫자이다.
      */
     func isValidCardNumber(_ cardNumber: String?) -> Bool {
         guard let cardNumber else { return false }
-        guard let compareValue = self.getCompareValueForValid(cardNumber) else { return false }
-        let compareValideCode = self.getValidCode(compareValue)
-        guard let valideCode = self.getValidCode(cardNumber) else { return false }
-        return compareValideCode == valideCode
-    }
-    func getCompareValueForValid(_ cardNumber: String) -> Int? {
-        var sum: Int?
-        cardNumber.dropLast(1).replacingOccurrences(of: " ", with: "")
-            .enumerated().forEach { index, character in
-                let singleNumber = String(character)
-                guard let number = Int(singleNumber) else { return }
-
-                let baseSum = sum ?? 0
-                if index % 2 == 0 {
-                    // 10이 넘을 경우 각 자릿수 숫자끼리 더한다.
-                    let number = (number * 2).reduceDigits()
-                    sum = baseSum + number
-                }
-                else {
-                    sum = baseSum + number
-                }
+        var sum = 0
+        var alternate = false
+        let reversedCardNumber = cardNumber.reversed().map { String($0) }
+        
+        for digit in reversedCardNumber {
+            guard let value = Int(digit) else { return false }
+            if alternate {
+                sum += (value * 2 > 9) ? (value * 2 - 9) : (value * 2)
+            } else {
+                sum += value
             }
-        return sum
-    }
-    
-    func getValidCode(_ value: Int) -> Int {
-        let code = value % 10 // 1의 자리 숫자 구함
-        if code == 0 { return 0 }
-        else { return 10 - code }
-    }
-    func getValidCode(_ cardNumber: String) -> Int? {
-        let lastCardNumber = String(cardNumber.suffix(1))
-        return Int(lastCardNumber)
+            alternate.toggle()
+        }
+        
+        return sum % 10 == 0
     }
     
 } //: OCRResultView
