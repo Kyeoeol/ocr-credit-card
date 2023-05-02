@@ -19,7 +19,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let rootViewController = UIHostingController(
             rootView: ContentView()
-                .environmentObject(AVCaptureManager())
                 .environment(\.windowSize, window.screen.bounds.size)
         )
         window.rootViewController = rootViewController

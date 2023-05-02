@@ -50,15 +50,15 @@ private extension OCRResultView {
     
     // MARK: Process RecognizeText
     func processRecognizeText(with cvImageBuffer: CVImageBuffer?) {
-        // CIImage
         guard let buffer = cvImageBuffer else {
             return
         }
-        guard let ciImage = buffer.createCIImage() else {
+        // CGImage
+        guard let cgImage = buffer.createCGImage() else {
             return
         }
         // Guide Size Image
-        guard let guideSizeImage = createGuideSizeImage(from: ciImage) else {
+        guard let guideSizeImage = createGuideSizeImage(from: cgImage) else {
             return
         }
         // Perform RecognizeText
@@ -67,29 +67,19 @@ private extension OCRResultView {
     
     
     // MARK: Create GuideSize Image
-    func createGuideSizeImage(from ciImage: CIImage) -> CIImage? {
-        let scale = windowSize.height / ciImage.extent.height
-        let aspectRatio = windowSize.width / (ciImage.extent.width * scale)
-        
-        guard let ciFilter = CIFilter(name: "CILanczosScaleTransform") else {
-            return nil
-        }
-        ciFilter.setValue(ciImage, forKey: kCIInputImageKey)
-        ciFilter.setValue(scale, forKey: kCIInputScaleKey)
-        ciFilter.setValue(aspectRatio, forKey: kCIInputAspectRatioKey)
-        
-        guard let outputImage = ciFilter.outputImage else {
-            return nil
-        }
-        let guideSizeImage = outputImage.cropped(to: ocrGuideSize)
-        return guideSizeImage
+    func createGuideSizeImage(from cgImage: CGImage) -> CGImage? {
+        return cgImage.cropping(to: ocrGuideSize)
     }
     
     
     // MARK: Perform RecognizeText Request
-    func performRecognizeTextRequest(with ciImage: CIImage) {
+    func performRecognizeTextRequest(with cgImage: CGImage) {
         // Handler
-        let handler = VNImageRequestHandler(ciImage: ciImage, options: [:])
+        let handler = VNImageRequestHandler(
+            cgImage: cgImage,
+            orientation: .right,
+            options: [:]
+        )
         
         // Request
         let request = VNRecognizeTextRequest { request, error in

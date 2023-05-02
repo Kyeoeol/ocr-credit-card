@@ -11,7 +11,7 @@ struct ContentView: View {
     
     // MARK: Properties
     
-    @EnvironmentObject var avCaptureManeger: AVCaptureManager
+    @ObservedObject var avCaptureManeger: AVCaptureManager
     
     private var buffer: CVImageBuffer? {
         return avCaptureManeger.currentImageBuffer
@@ -46,6 +46,8 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(
+            avCaptureManeger: AVCaptureManager()
+        )
     }
 }
