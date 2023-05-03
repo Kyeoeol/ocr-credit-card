@@ -38,7 +38,6 @@ struct DateFormatWrapper {
         
         guard let inputDate = dateFormatter.date(from: inputDateString) else {
             return ""
-            
         }
         
         dateFormatter.dateFormat = dateFormat
