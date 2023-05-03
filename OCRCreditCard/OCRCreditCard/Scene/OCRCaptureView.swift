@@ -69,6 +69,7 @@ struct OCRCaptureView: View {
             Just(cardNumber).zip(Just(cardValidDate))
         ) { cardNumber, cardValidDate in
             guard let cardNumber, let cardValidDate else { return }
+            session.stopRunning()
             ocrCaptureResult = OCRCaptureResult(
                 cardNumber: cardNumber,
                 cardValidDate: cardValidDate

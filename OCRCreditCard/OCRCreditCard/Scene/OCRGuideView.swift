@@ -23,8 +23,8 @@ struct OCRGuideView: View {
                 .opacity(0.6)
             
             Rectangle()
-                .frame(width: ocrGuideSize.width,
-                       height: ocrGuideSize.height)
+                .frame(width: CGFloat(ocrGuideSize.width),
+                       height: CGFloat(ocrGuideSize.height))
                 .cornerRadius(12)
                 .blendMode(.destinationOut)
         } //: ZStack

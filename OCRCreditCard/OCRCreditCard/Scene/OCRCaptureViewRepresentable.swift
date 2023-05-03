@@ -82,8 +82,8 @@ struct OCRCaptureViewRepresentable: UIViewRepresentable {
         
         // MARK: Get GuideSize Image
         func getGuideSizeImage(from ciImage: CIImage) -> CIImage? {
-            let scale = previewLayerSize.height / ciImage.extent.height
-            let aspectRatio = previewLayerSize.width / (ciImage.extent.width * scale)
+            let scale = CGFloat(previewLayerSize.height) / ciImage.extent.height
+            let aspectRatio = CGFloat(previewLayerSize.width) / (ciImage.extent.width * scale)
             
             guard let ciFilter = CIFilter(name: "CILanczosScaleTransform") else { return nil }
             ciFilter.setValue(ciImage, forKey: kCIInputImageKey)
@@ -91,10 +91,10 @@ struct OCRCaptureViewRepresentable: UIViewRepresentable {
             ciFilter.setValue(aspectRatio, forKey: kCIInputAspectRatioKey)
             
             guard let outputImage = ciFilter.outputImage else { return nil }
-            let width = ocrGuideSize.width
-            let height = ocrGuideSize.height
-            let x = (previewLayerSize.width / 2) - (width / 2)
-            let y = (previewLayerSize.height / 2) - (height / 2)
+            let width = CGFloat(ocrGuideSize.width)
+            let height = CGFloat(ocrGuideSize.height)
+            let x = (CGFloat(previewLayerSize.width) / 2) - (width / 2)
+            let y = (CGFloat(previewLayerSize.height) / 2) - (height / 2)
             let finalCIImage = outputImage.cropped(to: CGRect(
                 x: x,
                 y: y,
@@ -127,8 +127,6 @@ struct OCRCaptureViewRepresentable: UIViewRepresentable {
                     .compactMap { $0.string.replacingOccurrences(of: "[^0-9/]", with: "", options: .regularExpression) }
                     .joined()
                 
-                print("TEST::", topCandidates)
-                
                 // Extract Card Info
                 self?.extractCardInfo(from: recognizedText)
             }
@@ -146,6 +144,7 @@ struct OCRCaptureViewRepresentable: UIViewRepresentable {
         
         // MARK: Extract Card Info
         func extractCardInfo(from recognizedText: String) {
+            print("TEST::", recognizedText)
             self.getCardNumber(recognizedText)
             self.getCardValidDate(recognizedText)
         }
@@ -223,14 +222,23 @@ struct OCRCaptureViewRepresentable: UIViewRepresentable {
         
         // Add Video Output
         if session.canAddOutput(videoOutput) {
+            // Video Settings
+            self.videoOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as NSString: NSNumber(value: kCVPixelFormatType_32BGRA)] as [String: Any]
+            // Set Video Output Delegate
+            videoOutput.setSampleBufferDelegate(context.coordinator, queue: DispatchQueue.main)
+            // Add
             session.addOutput(videoOutput)
+            // Set Orientation
+            if let connection = videoOutput.connection(with: AVMediaType.video),
+               connection.isVideoOrientationSupported {
+                connection.videoOrientation = .portrait
+            }
         }
         else {
             error = .cannotAddVideoOutput
             return UIView()
         }
-        // Set Video Output Delegate
-        videoOutput.setSampleBufferDelegate(context.coordinator, queue: DispatchQueue.main)
+        
         
         // Add PreviewLayer
         let previewLayer = AVCaptureVideoPreviewLayer(session: session)
