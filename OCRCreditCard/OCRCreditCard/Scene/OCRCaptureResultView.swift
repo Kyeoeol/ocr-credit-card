@@ -6,40 +6,45 @@
 //
 
 import SwiftUI
+import Combine
 
 struct OCRCaptureResultView: View {
     
     // MARK: Properties
     
     @Binding var ocrCaptureResult: OCRCaptureResult?
+    @State private var scale: CGFloat = 0.0
     
     
     // MARK: Body
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
+            // CardNumber
             VStack(alignment: .leading) {
-                // CardNumber
-                VStack(alignment: .leading) {
-                    Text("CardNumber :")
-                        .fontWeight(.bold)
-                    Text(ocrCaptureResult?.cardNumber ?? "")
-                }
-                .padding(.bottom, 4)
-                
-                // CardValidDate
-                VStack(alignment: .leading) {
-                    Text("CardValidDate : ")
-                        .fontWeight(.bold)
-                    Text(ocrCaptureResult?.cardValidDate ?? "")
-                }
-            } //: VStack
-            .padding()
-            .background(Color.white)
-            .cornerRadius(12)
+                Text("CardNumber :")
+                    .fontWeight(.bold)
+                Text(ocrCaptureResult?.cardNumber ?? "")
+            }
+            .padding(.bottom, 4)
             
-            Spacer()
+            // CardValidDate
+            VStack(alignment: .leading) {
+                Text("CardValidDate : ")
+                    .fontWeight(.bold)
+                Text(ocrCaptureResult?.cardValidDate ?? "")
+            }
         } //: VStack
+        .padding()
+        .background(Color.white)
+        .cornerRadius(12)
+        .scaleEffect(scale)
+        .onReceive(Just(ocrCaptureResult)) { value in
+            guard value != nil else { return }
+            withAnimation {
+                scale = 1.0
+            }
+        }
     }
 }
 
