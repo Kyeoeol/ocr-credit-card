@@ -34,18 +34,6 @@ extension String {
         return matchedSubstring
     }
     
-    
-    // MARK: Separated
-    func separated(_ length: Int) -> String {
-        return stride(from: 0, to: self.count, by: length).map {
-            let startIndex = self.index(self.startIndex, offsetBy: $0)
-            let endIndex = self.index(startIndex, offsetBy: length, limitedBy: self.endIndex) ?? self.endIndex
-            return String(self[startIndex..<endIndex])
-        }
-        .joined(separator: " ")
-    }
-    
-    
     // MARK: Card Number Verification
     /*
      - Luhn’s Algorithm(룬 알고리즘)

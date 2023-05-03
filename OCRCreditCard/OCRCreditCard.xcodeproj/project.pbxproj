@@ -18,6 +18,8 @@
 		805D52C929FCFFDA00FA5A5F /* AppMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805D52C829FCFFDA00FA5A5F /* AppMain.swift */; };
 		805D52CE29FD25A200FA5A5F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805D52CD29FD25A200FA5A5F /* SceneDelegate.swift */; };
 		805D52F029FD2EE300FA5A5F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 805D52EF29FD2EE300FA5A5F /* Launch Screen.storyboard */; };
+		80BE83C92A029B010067480B /* DigitSpaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BE83C82A029B010067480B /* DigitSpaces.swift */; };
+		80BE83CB2A02A4340067480B /* DateFormatWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BE83CA2A02A4340067480B /* DateFormatWrapper.swift */; };
 		80DFCF5D29FEAD14008AD744 /* OCRCaptureError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DFCF5C29FEAD14008AD744 /* OCRCaptureError.swift */; };
 		80DFCF6129FEADDD008AD744 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DFCF6029FEADDD008AD744 /* Int+Extension.swift */; };
 		80DFCF6329FEAEE6008AD744 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DFCF6229FEAEE6008AD744 /* String+Extension.swift */; };
@@ -52,6 +54,8 @@
 		805D52C829FCFFDA00FA5A5F /* AppMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMain.swift; sourceTree = "<group>"; };
 		805D52CD29FD25A200FA5A5F /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		805D52EF29FD2EE300FA5A5F /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		80BE83C82A029B010067480B /* DigitSpaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitSpaces.swift; sourceTree = "<group>"; };
+		80BE83CA2A02A4340067480B /* DateFormatWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatWrapper.swift; sourceTree = "<group>"; };
 		80DFCF5C29FEAD14008AD744 /* OCRCaptureError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRCaptureError.swift; sourceTree = "<group>"; };
 		80DFCF6029FEADDD008AD744 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		80DFCF6229FEAEE6008AD744 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
@@ -111,6 +115,7 @@
 				805D52AA29FCFC0D00FA5A5F /* App */,
 				805D52A929FCFBFE00FA5A5F /* Resource */,
 				80DFCF5F29FEAD52008AD744 /* Extension */,
+				80BE83C72A029ADA0067480B /* PropertyWrappers */,
 				80DFCF5E29FEAD21008AD744 /* Error */,
 				8056E6B92A015F3500B318FF /* Model */,
 				805D52AB29FCFC9B00FA5A5F /* Scene */,
@@ -166,6 +171,15 @@
 				805D52CD29FD25A200FA5A5F /* SceneDelegate.swift */,
 			);
 			path = Delegates;
+			sourceTree = "<group>";
+		};
+		80BE83C72A029ADA0067480B /* PropertyWrappers */ = {
+			isa = PBXGroup;
+			children = (
+				80BE83C82A029B010067480B /* DigitSpaces.swift */,
+				80BE83CA2A02A4340067480B /* DateFormatWrapper.swift */,
+			);
+			path = PropertyWrappers;
 			sourceTree = "<group>";
 		};
 		80DFCF5E29FEAD21008AD744 /* Error */ = {
@@ -293,11 +307,13 @@
 				8056E6B62A01422500B318FF /* OCRCaptureView.swift in Sources */,
 				80DFCF7F29FFD3AD008AD744 /* CVImageBuffer+Extension.swift in Sources */,
 				80DFCF7929FFA0B1008AD744 /* Environments.swift in Sources */,
+				80BE83CB2A02A4340067480B /* DateFormatWrapper.swift in Sources */,
 				805D52C929FCFFDA00FA5A5F /* AppMain.swift in Sources */,
 				80DFCF6129FEADDD008AD744 /* Int+Extension.swift in Sources */,
 				805D52CE29FD25A200FA5A5F /* SceneDelegate.swift in Sources */,
 				80DFCF7429FF9344008AD744 /* OCRCaptureErrorView.swift in Sources */,
 				8056E6B82A015EF000B318FF /* OCRCaptureResultView.swift in Sources */,
+				80BE83C92A029B010067480B /* DigitSpaces.swift in Sources */,
 				8056E6BB2A015F6F00B318FF /* OCRCaptureResultModel.swift in Sources */,
 				8056E6B42A013F7300B318FF /* OCRCaptureViewRepresentable.swift in Sources */,
 				80DFCF5D29FEAD14008AD744 /* OCRCaptureError.swift in Sources */,

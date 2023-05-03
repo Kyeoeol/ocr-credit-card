@@ -8,6 +8,9 @@
 import Foundation
 
 struct OCRCaptureResult {
-    var cardNumber: String
-    var cardValidDate: String
+    @DigitSpaces(spaceEvery: 4)
+    var cardNumber: String = ""
+    
+    @DateFormatWrapper(dateFormat: "yyyy년 MM월")
+    var cardValidDate: String = ""
 }

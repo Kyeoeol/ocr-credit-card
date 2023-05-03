@@ -150,7 +150,7 @@ struct OCRCaptureViewRepresentable: UIViewRepresentable {
         func getCardNumber(_ text: String) {
             guard let cardNumber = text.getMatchedText(pattern: .cardNumber) else { return }
             guard cardNumber.isValidCardNumber else { return }
-            self.cardNumber = cardNumber.separated(4)
+            self.cardNumber = cardNumber
         }
         func getCardValidDate(_ text: String) {
             guard let cardValidDate = text.getMatchedText(pattern: .cardValidDate) else { return }
