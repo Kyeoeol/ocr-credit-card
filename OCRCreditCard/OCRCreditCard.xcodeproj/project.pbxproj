@@ -114,10 +114,10 @@
 			isa = PBXGroup;
 			children = (
 				805D52AA29FCFC0D00FA5A5F /* App */,
-				805D52A929FCFBFE00FA5A5F /* Resources */,
-				80BE83CC2A03E24D0067480B /* Utils */,
 				8056E6B92A015F3500B318FF /* Models */,
 				805D52AB29FCFC9B00FA5A5F /* Scenes */,
+				805D52A929FCFBFE00FA5A5F /* Resources */,
+				80BE83CC2A03E24D0067480B /* Utils */,
 			);
 			path = OCRCreditCard;
 			sourceTree = "<group>";
@@ -184,7 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				80BE83C72A029ADA0067480B /* PropertyWrappers */,
-				80DFCF5F29FEAD52008AD744 /* Extension */,
+				80DFCF5F29FEAD52008AD744 /* Extensions */,
 				80DFCF7829FFA0B1008AD744 /* Environments.swift */,
 			);
 			path = Utils;
@@ -198,14 +198,14 @@
 			path = ErrorModel;
 			sourceTree = "<group>";
 		};
-		80DFCF5F29FEAD52008AD744 /* Extension */ = {
+		80DFCF5F29FEAD52008AD744 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				80DFCF7E29FFD3AC008AD744 /* CVImageBuffer+Extension.swift */,
 				80DFCF6029FEADDD008AD744 /* Int+Extension.swift */,
 				80DFCF6229FEAEE6008AD744 /* String+Extension.swift */,
 			);
-			path = Extension;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
