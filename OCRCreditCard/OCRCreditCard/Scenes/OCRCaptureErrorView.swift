@@ -44,6 +44,6 @@ struct OCRCaptureErrorView: View {
 
 struct OCRCaptureErrorView_Previews: PreviewProvider {
     static var previews: some View {
-        OCRCaptureErrorView(error: OCRCaptureError.cannotAddDeviceInput)
+        OCRCaptureErrorView(error: AVCaptureError.cannotAddDeviceInput)
     }
 }

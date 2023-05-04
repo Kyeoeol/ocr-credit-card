@@ -19,7 +19,7 @@ struct OCRCaptureView: View {
     
     @Binding var ocrCaptureResult: OCRCaptureResult?
     
-    @State private var error: OCRCaptureError?
+    @State private var error: AVCaptureError?
     @State private var status: OCRAuthStatus = .unauthorized
     @State private var cardNumber: String?
     @State private var cardValidDate: String?

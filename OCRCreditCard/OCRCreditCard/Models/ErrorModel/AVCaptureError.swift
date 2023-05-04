@@ -1,5 +1,5 @@
 //
-//  OCRCaptureError.swift
+//  AVCaptureError.swift
 //  OCRCreditCard
 //
 //  Created by kyeoeol on 2023/04/30.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum OCRCaptureError: Error {
+enum AVCaptureError: Error {
     case faildToGetCaptureDevice
     case cannotAddDeviceInput
     case cannotAddVideoOutput
@@ -18,7 +18,7 @@ enum OCRCaptureError: Error {
     case unspecified(String)
 }
 
-extension OCRCaptureError: LocalizedError {
+extension AVCaptureError: LocalizedError {
     
     var errorDescription: String? {
         switch self {

@@ -15,7 +15,7 @@ struct OCRCaptureViewRepresentable: UIViewRepresentable {
     
     @Environment(\.ocrGuideSize) var ocrGuideSize
     
-    @Binding var error: OCRCaptureError?
+    @Binding var error: AVCaptureError?
     @Binding var cardNumber: String?
     @Binding var cardValidDate: String?
 
