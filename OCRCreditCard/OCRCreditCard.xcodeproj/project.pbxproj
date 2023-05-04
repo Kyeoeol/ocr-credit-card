@@ -83,12 +83,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8056E6B92A015F3500B318FF /* Model */ = {
+		8056E6B92A015F3500B318FF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				80DFCF5E29FEAD21008AD744 /* ErrorModel */,
 				8056E6BA2A015F6F00B318FF /* OCRCaptureResultModel.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		805D526D29FCFB8600FA5A5F = {
@@ -113,12 +114,10 @@
 			isa = PBXGroup;
 			children = (
 				805D52AA29FCFC0D00FA5A5F /* App */,
-				805D52A929FCFBFE00FA5A5F /* Resource */,
-				80DFCF5F29FEAD52008AD744 /* Extension */,
-				80BE83C72A029ADA0067480B /* PropertyWrappers */,
-				80DFCF5E29FEAD21008AD744 /* Error */,
-				8056E6B92A015F3500B318FF /* Model */,
-				805D52AB29FCFC9B00FA5A5F /* Scene */,
+				805D52A929FCFBFE00FA5A5F /* Resources */,
+				80BE83CC2A03E24D0067480B /* Utils */,
+				8056E6B92A015F3500B318FF /* Models */,
+				805D52AB29FCFC9B00FA5A5F /* Scenes */,
 			);
 			path = OCRCreditCard;
 			sourceTree = "<group>";
@@ -131,12 +130,12 @@
 			path = OCRCreditCardTests;
 			sourceTree = "<group>";
 		};
-		805D52A929FCFBFE00FA5A5F /* Resource */ = {
+		805D52A929FCFBFE00FA5A5F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				805D528229FCFB8800FA5A5F /* Assets.xcassets */,
 			);
-			path = Resource;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		805D52AA29FCFC0D00FA5A5F /* App */ = {
@@ -146,12 +145,11 @@
 				805D52C829FCFFDA00FA5A5F /* AppMain.swift */,
 				805D52EF29FD2EE300FA5A5F /* Launch Screen.storyboard */,
 				805D528729FCFB8800FA5A5F /* Info.plist */,
-				80DFCF7829FFA0B1008AD744 /* Environments.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
 		};
-		805D52AB29FCFC9B00FA5A5F /* Scene */ = {
+		805D52AB29FCFC9B00FA5A5F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
 				805D52AC29FCFCFC00FA5A5F /* ContentView.swift */,
@@ -161,7 +159,7 @@
 				80DFCF7529FF95C3008AD744 /* OCRGuideView.swift */,
 				80DFCF7329FF9344008AD744 /* OCRCaptureErrorView.swift */,
 			);
-			path = Scene;
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		805D52CA29FD019400FA5A5F /* Delegates */ = {
@@ -182,12 +180,22 @@
 			path = PropertyWrappers;
 			sourceTree = "<group>";
 		};
-		80DFCF5E29FEAD21008AD744 /* Error */ = {
+		80BE83CC2A03E24D0067480B /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				80BE83C72A029ADA0067480B /* PropertyWrappers */,
+				80DFCF5F29FEAD52008AD744 /* Extension */,
+				80DFCF7829FFA0B1008AD744 /* Environments.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		80DFCF5E29FEAD21008AD744 /* ErrorModel */ = {
 			isa = PBXGroup;
 			children = (
 				80DFCF5C29FEAD14008AD744 /* OCRCaptureError.swift */,
 			);
-			path = Error;
+			path = ErrorModel;
 			sourceTree = "<group>";
 		};
 		80DFCF5F29FEAD52008AD744 /* Extension */ = {
