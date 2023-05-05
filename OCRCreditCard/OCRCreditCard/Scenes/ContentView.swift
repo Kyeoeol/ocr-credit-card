@@ -14,6 +14,9 @@ struct ContentView: View {
 //    @State private var ocrCaptureResult: OCRCaptureResult?
     @ObservedObject var avCaptureService = AVCaptureService.shared
     
+    private var image: CGImage? {
+        return avCaptureService.bufferImage
+    }
     
     // MARK: Body
     
@@ -23,6 +26,25 @@ struct ContentView: View {
 //            OCRGuideView()
 //            OCRCaptureResultView(ocrCaptureResult: $ocrCaptureResult)
 //            Color.black
+            
+            
+            // TEST
+            if let image {
+                GeometryReader { proxy in
+                    Image(image,
+                        scale: 1.0,
+                        label: Text("TEST"))
+                  .resizable()
+                  .scaledToFill()
+                  .frame(width: proxy.size.width,
+                         height: proxy.size.height,
+                         alignment: .center)
+                  .clipped()
+                } //: GeometryReader
+            }
+            
+            
+            
             OCRCaptureErrorView(error: avCaptureService.error)
         }
     }

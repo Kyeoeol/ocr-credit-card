@@ -9,7 +9,11 @@ import AVFoundation
 import SwiftUI
 import Combine
 
-final class AVCaptureService: ObservableObject {
+/*
+ Needs to inherit from NSObject.
+ Because AVCaptureService will adopt AVCaptureSession‘s video output.
+ */
+final class AVCaptureService: NSObject, ObservableObject {
     enum Status {
         case unconfigured
         case configured
@@ -24,6 +28,7 @@ final class AVCaptureService: ObservableObject {
     
     // Output
     @Published var error: Error?
+    @Published var bufferImage: CGImage?
     
     var serviceStatus: AVCaptureService.Status {
         self.status
@@ -49,11 +54,12 @@ final class AVCaptureService: ObservableObject {
     
     // MARK: Initialize
     
-    private init() {
+    private override init() {
+        super.init()
+        
         Task {
             await configure()
         }
-        
     }
     
     
@@ -91,6 +97,22 @@ final class AVCaptureService: ObservableObject {
 }
 
 
+// MARK: AVCaptureVideoDataOutputSampleBufferDelegate
+
+extension AVCaptureService: AVCaptureVideoDataOutputSampleBufferDelegate {
+    
+    func captureOutput(
+        _ output: AVCaptureOutput,
+        didOutput sampleBuffer: CMSampleBuffer,
+        from connection: AVCaptureConnection
+    ) {
+        guard let buffer = sampleBuffer.imageBuffer else { return }
+        bufferImage = buffer.createCGImage()
+    }
+    
+}
+
+
 // MARK: - Configure
 
 private extension AVCaptureService {
@@ -98,6 +120,10 @@ private extension AVCaptureService {
     private func configure() async {
         do {
             try await checkCaptureDevicePermission()
+            setCaptureSession()
+            try await setDeviceInput()
+            try await setVideoDataOutput()
+            startSession()
         }
         catch {
             setError(error)
@@ -141,15 +167,55 @@ private extension AVCaptureService {
     
     // MARK: Set Device Input
     
-    func setDeviceInput() {
+    func setDeviceInput() async throws {
+        guard let device = self.device else {
+            throw AVCaptureError.faildToGetCaptureDevice
+        }
         
+        // Device Configuration
+        do {
+            try device.lockForConfiguration()
+            if device.isFocusModeSupported(.continuousAutoFocus) {
+                device.focusMode = .continuousAutoFocus
+            }
+            device.unlockForConfiguration()
+        }
+        catch {
+            throw AVCaptureError.unspecified("Failed to configure focusMode.")
+        }
+        
+        // Add Device Input
+        do {
+            let deviceInput = try AVCaptureDeviceInput(device: device)
+            if session.canAddInput(deviceInput) {
+                session.addInput(deviceInput)
+            }
+            else {
+                throw AVCaptureError.cannotAddDeviceInput
+            }
+        }
+        catch {
+            throw AVCaptureError.createCaptureInput(error)
+        }
     }
     
     
     // MARK: Set VideoData Output
     
-    func setVideoDataOutput() {
-        
+    func setVideoDataOutput() async throws {
+        guard session.canAddOutput(videoOutput) else {
+            throw AVCaptureError.cannotAddVideoOutput
+        }
+        self.videoOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as NSString: NSNumber(value: kCVPixelFormatType_32BGRA)] as [String: Any]
+        // Set Video Output Delegate
+        videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue.main)
+        // Add
+        session.addOutput(videoOutput)
+        // Set Orientation
+        if let connection = videoOutput.connection(with: AVMediaType.video),
+           connection.isVideoOrientationSupported {
+            connection.videoOrientation = .portrait
+        }
     }
     
 }
