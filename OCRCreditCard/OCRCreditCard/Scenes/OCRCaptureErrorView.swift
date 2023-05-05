@@ -11,7 +11,14 @@ struct OCRCaptureErrorView: View {
     
     // MARK: Properties
     
-    var error: Error
+    var error: Error?
+    
+    private var opacity: CGFloat {
+        return error == nil ? 0.0 : 1.0
+    }
+    private var errorMessage: String {
+        return error?.localizedDescription ?? ""
+    }
     
     
     // MARK: Body
@@ -22,7 +29,7 @@ struct OCRCaptureErrorView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
-                Text(error.localizedDescription)
+                Text(errorMessage)
                     .bold()
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
@@ -36,6 +43,7 @@ struct OCRCaptureErrorView: View {
                 Spacer()
             } //: VStack
         } //: ZStack
+        .opacity(opacity)
     }
 }
 

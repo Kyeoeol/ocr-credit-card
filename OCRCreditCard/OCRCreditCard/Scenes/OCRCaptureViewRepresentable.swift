@@ -184,40 +184,40 @@ struct OCRCaptureViewRepresentable: UIViewRepresentable {
             session.commitConfiguration()
         }
         
-        // AVCaptureDevice
-        guard let device = self.device else {
-            error = .faildToGetCaptureDevice
-            return UIView()
-        }
-        
-        // Device Configuration
-        do {
-            try device.lockForConfiguration()
-            if device.isFocusModeSupported(.continuousAutoFocus) {
-                device.focusMode = .continuousAutoFocus
-            }
-            device.unlockForConfiguration()
-        }
-        catch {
-            self.error = .unspecified("Failed to configure focusMode.")
-            return UIView()
-        }
-        
-        // Add Device Input
-        do {
-            let deviceInput = try AVCaptureDeviceInput(device: device)
-            if session.canAddInput(deviceInput) {
-                session.addInput(deviceInput)
-            }
-            else {
-                error = .cannotAddDeviceInput
-                return UIView()
-            }
-        }
-        catch {
-            self.error = .createCaptureInput(error)
-            return UIView()
-        }
+//        // AVCaptureDevice
+//        guard let device = self.device else {
+//            error = .faildToGetCaptureDevice
+//            return UIView()
+//        }
+//        
+//        // Device Configuration
+//        do {
+//            try device.lockForConfiguration()
+//            if device.isFocusModeSupported(.continuousAutoFocus) {
+//                device.focusMode = .continuousAutoFocus
+//            }
+//            device.unlockForConfiguration()
+//        }
+//        catch {
+//            self.error = .unspecified("Failed to configure focusMode.")
+//            return UIView()
+//        }
+//        
+//        // Add Device Input
+//        do {
+//            let deviceInput = try AVCaptureDeviceInput(device: device)
+//            if session.canAddInput(deviceInput) {
+//                session.addInput(deviceInput)
+//            }
+//            else {
+//                error = .cannotAddDeviceInput
+//                return UIView()
+//            }
+//        }
+//        catch {
+//            self.error = .createCaptureInput(error)
+//            return UIView()
+//        }
         
         // Add Video Output
         if session.canAddOutput(videoOutput) {

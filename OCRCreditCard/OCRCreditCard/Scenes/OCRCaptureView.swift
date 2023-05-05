@@ -38,7 +38,7 @@ struct OCRCaptureView: View {
     var body: some View {
         ZStack {
             if let error {
-                OCRCaptureErrorView(error: error)
+//                OCRCaptureErrorView(error: error)
             }
             else if status == .authorized {
                 GeometryReader { proxy in

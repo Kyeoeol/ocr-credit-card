@@ -88,7 +88,6 @@
 		8056E6B92A015F3500B318FF /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				80DFCF5E29FEAD21008AD744 /* ErrorModel */,
 				8056E6BA2A015F6F00B318FF /* OCRCaptureResultModel.swift */,
 			);
 			path = Models;
@@ -196,17 +195,10 @@
 		80BE83CD2A03E48D0067480B /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				80DFCF5C29FEAD14008AD744 /* AVCaptureError.swift */,
 				80BE83CE2A03E4AF0067480B /* AVCaptureService.swift */,
 			);
 			path = Services;
-			sourceTree = "<group>";
-		};
-		80DFCF5E29FEAD21008AD744 /* ErrorModel */ = {
-			isa = PBXGroup;
-			children = (
-				80DFCF5C29FEAD14008AD744 /* AVCaptureError.swift */,
-			);
-			path = ErrorModel;
 			sourceTree = "<group>";
 		};
 		80DFCF5F29FEAD52008AD744 /* Extensions */ = {

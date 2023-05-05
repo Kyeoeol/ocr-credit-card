@@ -11,16 +11,19 @@ struct ContentView: View {
     
     // MARK: Properties
     
-    @State private var ocrCaptureResult: OCRCaptureResult?
+//    @State private var ocrCaptureResult: OCRCaptureResult?
+    @ObservedObject var avCaptureService = AVCaptureService.shared
     
     
     // MARK: Body
     
     var body: some View {
         ZStack {
-            OCRCaptureView(ocrCaptureResult: $ocrCaptureResult)
-            OCRGuideView()
-            OCRCaptureResultView(ocrCaptureResult: $ocrCaptureResult)
+//            OCRCaptureView(ocrCaptureResult: $ocrCaptureResult)
+//            OCRGuideView()
+//            OCRCaptureResultView(ocrCaptureResult: $ocrCaptureResult)
+//            Color.black
+            OCRCaptureErrorView(error: avCaptureService.error)
         }
     }
 }
