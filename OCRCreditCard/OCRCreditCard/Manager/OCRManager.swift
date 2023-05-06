@@ -69,7 +69,6 @@ final class OCRManager: ObservableObject {
     func setGuideSize(windowSize: CGSize, guideSize: CGRect) {
         self.windowSize = windowSize
         self.guideSize = guideSize
-        print("TEST::windowSize", windowSize)
     }
     
     // MARK: Start OCR
