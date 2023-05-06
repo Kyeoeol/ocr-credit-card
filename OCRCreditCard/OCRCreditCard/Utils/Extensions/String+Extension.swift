@@ -14,6 +14,7 @@ extension String {
         case cardValidDate = "(0[1-9]|1[0-2])/([0-9]{2})"
     }
     
+    
     // MARK: Get Matched Text
     func getMatchedText(pattern: RegexPattern) -> String? {
         // Create a regular expression object from the pattern
@@ -34,6 +35,7 @@ extension String {
         return matchedSubstring
     }
     
+    
     // MARK: Card Number Verification
     /*
      - Luhn’s Algorithm(룬 알고리즘)
@@ -42,7 +44,7 @@ extension String {
      - 카드 종류에 따라 룬 알고리즘으로 유효성을 판별할 수 없는 경우도 있다.(ex. 삼성카드에서 발급한 법인카드)
      
      1. 뒤에서 2번째 자리 숫자부터 시작해, 하나씩 건너뛰면서 2를 곱해준 뒤, 모든 digit을 합산한다.
-     (각 digit의 합산이므로 2를 곱한 결과가 12인 경우 12가 아닌 1과 2를 각각 더한다.)
+        (각 digit의 합산이므로 2를 곱한 결과가 12인 경우 12가 아닌 1과 2를 각각 더한다.)
      2. 2로 곱하지 않은 모든 digit을 합산한다.
      3. 총 합계의 마지막 자리가 0이라면(즉 합계 모듈로 10의 결과가 0이라면) 유효한 숫자이다.
      */

@@ -1,5 +1,5 @@
 //
-//  AVCaptureService.swift
+//  AVCaptureManager.swift
 //  OCRCreditCard
 //
 //  Created by kyeoeol on 2023/05/04.
@@ -13,7 +13,7 @@ import Combine
  Needs to inherit from NSObject.
  Because AVCaptureService will adopt AVCaptureSession‘s video output.
  */
-final class AVCaptureService: NSObject, ObservableObject {
+final class AVCaptureManager: NSObject, ObservableObject {
     enum Status {
         case unconfigured
         case configured
@@ -21,25 +21,31 @@ final class AVCaptureService: NSObject, ObservableObject {
         case failed
     }
     
-    static let shared = AVCaptureService()
+    static let shared = AVCaptureManager()
     
     
     // MARK: Properties
     
     // Output
     @Published var error: Error?
-    @Published var bufferImage: CGImage?
+    @Published var currentBuffer: CVImageBuffer?
     
-    var serviceStatus: AVCaptureService.Status {
+    var serviceStatus: AVCaptureManager.Status {
         self.status
     }
     
     
     // Session
     private let session = AVCaptureSession()
-    private let sessionQueue = DispatchQueue(label: "com.ocr.sessionqueue")
+    private let sessionQueue = DispatchQueue(label: "com.ocr.sessionQueue")
     // Video Output
     private let videoOutput = AVCaptureVideoDataOutput()
+    private let videoOutputQueue = DispatchQueue(
+      label: "com.ocr.videoOutputQueue",
+      qos: .userInteractive,
+      attributes: [],
+      autoreleaseFrequency: .workItem
+    )
     // Capture Device
     private let device = AVCaptureDevice.default(for: .video)
     
@@ -99,15 +105,19 @@ final class AVCaptureService: NSObject, ObservableObject {
 
 // MARK: AVCaptureVideoDataOutputSampleBufferDelegate
 
-extension AVCaptureService: AVCaptureVideoDataOutputSampleBufferDelegate {
+extension AVCaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate {
     
     func captureOutput(
         _ output: AVCaptureOutput,
         didOutput sampleBuffer: CMSampleBuffer,
         from connection: AVCaptureConnection
     ) {
-        guard let buffer = sampleBuffer.imageBuffer else { return }
-        bufferImage = buffer.createCGImage()
+        guard let buffer = sampleBuffer.imageBuffer else {
+            return
+        }
+        DispatchQueue.main.async {
+            self.currentBuffer = buffer
+        }
     }
     
 }
@@ -115,12 +125,12 @@ extension AVCaptureService: AVCaptureVideoDataOutputSampleBufferDelegate {
 
 // MARK: - Configure
 
-private extension AVCaptureService {
+private extension AVCaptureManager {
     
     private func configure() async {
         do {
             try await checkCaptureDevicePermission()
-            setCaptureSession()
+            try await setCaptureSession()
             try await setDeviceInput()
             try await setVideoDataOutput()
             startSession()
@@ -160,8 +170,20 @@ private extension AVCaptureService {
     
     // MARK: Set Capture Session
     
-    func setCaptureSession() {
+    func setCaptureSession() async throws {
+        guard status == .unconfigured else {
+            throw AVCaptureError.unspecified("ERROR::Capture session is already configured.")
+        }
+        /*
+         So far, this is pretty straightforward.
+         But it’s worth noting that any time you want to change something about an AVCaptureSession configuration,
+         you need to enclose that code between a beginConfiguration and a commitConfiguration.
+         */
+        session.beginConfiguration()
         session.sessionPreset = .photo
+        do {
+          self.session.commitConfiguration()
+        }
     }
     
     
@@ -181,7 +203,7 @@ private extension AVCaptureService {
             device.unlockForConfiguration()
         }
         catch {
-            throw AVCaptureError.unspecified("Failed to configure focusMode.")
+            throw AVCaptureError.unspecified("ERROR::Failed to configure focusMode.")
         }
         
         // Add Device Input
@@ -208,11 +230,11 @@ private extension AVCaptureService {
         }
         self.videoOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as NSString: NSNumber(value: kCVPixelFormatType_32BGRA)] as [String: Any]
         // Set Video Output Delegate
-        videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue.main)
+        videoOutput.setSampleBufferDelegate(self, queue: videoOutputQueue)
         // Add
         session.addOutput(videoOutput)
         // Set Orientation
-        if let connection = videoOutput.connection(with: AVMediaType.video),
+        if let connection = videoOutput.connection(with: .video),
            connection.isVideoOrientationSupported {
             connection.videoOrientation = .portrait
         }
@@ -223,7 +245,7 @@ private extension AVCaptureService {
 
 // MARK: -
 
-private extension AVCaptureService {
+private extension AVCaptureManager {
     
     // MARK: Set Error
     

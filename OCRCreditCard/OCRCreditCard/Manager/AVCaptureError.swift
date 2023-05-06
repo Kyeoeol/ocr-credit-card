@@ -19,7 +19,6 @@ enum AVCaptureError: Error {
 }
 
 extension AVCaptureError: LocalizedError {
-    
     var errorDescription: String? {
         switch self {
         case .faildToGetCaptureDevice:
@@ -47,5 +46,4 @@ extension AVCaptureError: LocalizedError {
             return "Unspecified Error: \(description)"
         }
     }
-    
 }

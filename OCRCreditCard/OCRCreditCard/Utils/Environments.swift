@@ -26,7 +26,7 @@ private struct OCRGuideSizeKey: EnvironmentKey {
 }
 
 extension EnvironmentValues {
-    var ocrGuideSize: CGSize {
+    var ocrGuideSize: CGRect {
         get {
             let windowSize = self[WindowSizeKey.self]
             let horizontalPadding: CGFloat = 64
@@ -34,7 +34,9 @@ extension EnvironmentValues {
             let creditCardStandardRate = CGFloat(53.98) / CGFloat(85.6)
             let width = max(windowSize.width - horizontalPadding, 0)
             let height = width * creditCardStandardRate
-            return CGSize(width: width, height: height)
+            let x = (windowSize.width / 2) - (width / 2)
+            let y = (windowSize.height / 2) - (height / 2)
+            return CGRect(x: x, y: y, width: width, height: height)
         }
     }
 }

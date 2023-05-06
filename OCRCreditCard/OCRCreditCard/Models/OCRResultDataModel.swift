@@ -1,5 +1,5 @@
 //
-//  OCRCaptureResultModel.swift
+//  OCRResultDataModel.swift
 //  OCRCreditCard
 //
 //  Created by kyeoeol on 2023/05/03.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct OCRCaptureResult {
+struct OCRResultData {
     @DigitSpaces(spaceEvery: 4)
     var cardNumber: String = ""
     
