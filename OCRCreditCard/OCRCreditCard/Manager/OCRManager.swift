@@ -41,7 +41,7 @@ final class OCRManager: ObservableObject {
             .compactMap { $0 }
             .sink { self.error = $0 }
             .store(in: &cancellable)
-
+        
         
         let currentBuffer = captureManager.$currentBuffer.share()
         
@@ -95,24 +95,24 @@ private extension OCRManager {
         guard let ciImage = getGuideSizeImage(from: ciImage) else {
             return
         }
-
+        
         // Handler
         let handler = VNImageRequestHandler(ciImage: ciImage, options: [:])
-
+        
         // Request
         let request = VNRecognizeTextRequest { [weak self] request, error in
             if let error {
                 self?.error = OCRError.requestRecognizeText(error)
                 return
             }
-
+            
             guard let observations = request.results as? [VNRecognizedTextObservation] else {
                 return
             }
             guard observations.isEmpty == false else {
                 return
             }
-
+            
             let topCandidates = observations.compactMap { $0.topCandidates(1) }
             let recognizedText = topCandidates.flatMap { $0 }
                 .filter { $0.confidence > 0.5 }
